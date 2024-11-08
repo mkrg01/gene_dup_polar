@@ -1,6 +1,6 @@
 # gene_dup_polar
 
-Code repository to run analyses for Nishiguchi, T. and Ishikawa, A. "Convergent gene duplication in Arctic and Antarctic teleost fish."
+Code repository to run analyses for Nishiguchi, T. and Ishikawa, A. "Convergent gene duplication in Arctic and Antarctic teleost fishes."
 
 [Snakemake](https://snakemake.github.io/) is used to manage the workflow.
 
