@@ -26,6 +26,7 @@ rule all:
         'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_GO_biological_process.tsv',
         'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_GO_cellular_component.tsv',
         'data/genome/191156at7898_Dm/gene_tree.pdf',
+        'data/genome/191156at7898_Dm/gene_tree_simple.pdf',
         'data/genome/428128at7898_Dm/gene_tree.pdf',
         'data/genome/409056at7898_Dm/gene_tree.pdf',
         'data/genome/489137at7898/gene_tree.pdf',
@@ -914,3 +915,17 @@ rule visualize_gene_tree_Dm:
         f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
     shell:
         'Rscript scripts/visualize_gene_tree.R --tree {input.tree} --seqinfo {input.seqinfo} --output {output} > {log.stdout} 2> {log.stderr}'
+
+rule visualize_gene_tree_Dm_simple:
+    input:
+        tree = 'data/genome/191156at7898_Dm/generax/results/191156at7898_Dm/geneTree.newick',
+        seqinfo = 'data/genome/191156at7898_Dm/seqinfo.tsv'
+    output:
+        'data/genome/191156at7898_Dm/gene_tree_simple.pdf'
+    log:
+        stdout = 'log/visualize_gene_tree_191156at7898_Dm_simple.stdout',
+        stderr = 'log/visualize_gene_tree_191156at7898_Dm_simple.stderr'
+    container:
+        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
+    shell:
+        'Rscript scripts/visualize_gene_tree_simple.R --tree {input.tree} --seqinfo {input.seqinfo} --output {output} > {log.stdout} 2> {log.stderr}'
