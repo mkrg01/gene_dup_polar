@@ -25,7 +25,7 @@ singularity pull docker://snakemake/snakemake:v7.32.4
 Run the workflow:
 
 ```
-singularity run snakemake_v7.32.4.sif snakemake --use-singularity
+singularity run snakemake_v7.32.4.sif snakemake --use-singularity --cores 1
 ```
 
 The output files will be generated in the `data` folder.
