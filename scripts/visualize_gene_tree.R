@@ -25,7 +25,7 @@ polar_fish <- seqinfo_df %>%
     pull(seq_id)
 
 p <- ggtree(tree) +
-	geom_tiplab(aes(label=label, color=ifelse(label %in% highlight, "red", ifelse(label %in% polar_fish, "cyan3", "black"))), size=1.0) +
+	geom_tiplab(aes(label=label, color=ifelse(label %in% highlight, "#FF0800", ifelse(label %in% polar_fish, "#00AAFF", "black"))), size=1.0) +
     geom_treescale(x=0, y=length(seqinfo_df$seq_id)*0.85) + 
     hexpand(0.03) +
     scale_color_identity() +

@@ -37,7 +37,7 @@ trait_og_df$Polar_fish <- factor(trait_og_df$Polar_fish, levels=c('True', 'False
 p <- ggplot(trait_og_df) +
     geom_point(aes(x=lat_abs_max, y=num, color = Polar_fish), size=0.5) +
     facet_wrap(~OG_id, ncol=4, scales='free') +
-    scale_color_manual(values = c(True = 'cyan3', False = 'black')) +
+    scale_color_manual(values = c(True = '#00AAFF', False = 'black')) +
     xlab('Max absolute latitude') +
     ylab('Copy number')
 

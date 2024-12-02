@@ -43,7 +43,7 @@ for (og_id in og_id_list) {
         .$OG_name
     p <- ggplot(trait_og_df, aes(x=lat_abs_max, y=!!sym(og_id), color = polar_fish)) +
         geom_point(size=0.5) +
-        scale_color_manual(values = c(True = "cyan3", False = "black")) +
+        scale_color_manual(values = c(True = "#00AAFF", False = "black")) +
         xlab('Absolute latitude (max)') +
         ylab('Copy number') +
         ggtitle(og_id) +

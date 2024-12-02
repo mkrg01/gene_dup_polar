@@ -50,7 +50,7 @@ polar_fish <- sp_list_df %>%
     pull(sci_name)
 
 p <- ggtree(tree_trait) +
-	geom_tiplab(aes(label=paste0('italic(', label, ')~italic()'), color=ifelse(label %in% polar_fish, "cyan3", "black")), parse=TRUE, size=1.0) +
+	geom_tiplab(aes(label=paste0('italic(', label, ')~italic()'), color=ifelse(label %in% polar_fish, "#00AAFF", "black")), parse=TRUE, size=1.0) +
 	scale_color_identity()
 
 p <- p +
@@ -60,7 +60,7 @@ p <- p +
 p <- p +
 	new_scale_fill() +
 	geom_fruit(data=gene_category_df, geom=geom_tile, mapping=aes(y=sci_name, x=OG, fill=n_gene), offset=0.01, pwidth=1.1, width=10, axis.params=c(axis='x', text.angle=90, text.size=1.5, hjust=1, line.color='white')) +
-	scale_fill_manual(name='Copy number', values=c('>4'='#003333', '4'='#336666', '3'='#669999', '2'='#99CCCC', '1'='#CCFFFF', '0'='#FFFFFF')) +
+	scale_fill_manual(name='Copy number', values=c('>4'='#000000', '4'='#334E5C', '3'='#668FA3', '2'='#99C2D6', '1'='#CCE7F5', '0'='#FFFFFF')) +
 	ylim(-length(tree$tip.label)/10, length(tree$tip.label)+1)
 
 ggsave(args$output, plot=p, width=5, height=5)

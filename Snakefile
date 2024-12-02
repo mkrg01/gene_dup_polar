@@ -13,8 +13,6 @@ rule all:
         'data/figure/n_gene_latitude_summary.pdf',
         # 'data/figure/n_gene_latitude_summary_renamed.pdf',
         'data/figure/tree_inc_polar_OG_2nd_select_all_species.pdf',
-        'data/figure/tree_inc_polar_OG_1st_select_all_species.pdf',
-        'data/figure/tree_inc_polar_OG_1st_select_downsampling.pdf',
         'data/species_list_1st_select_with_selected_OG_sort_by_family.tsv',
         'data/figure/tree_inc_polar_OG_2nd_select_pMCMC_all_species.pdf',
         # 'data/figure/tree_inc_polar_OG_2nd_select_all_species_renamed.pdf',
@@ -309,22 +307,6 @@ rule prune_tree:
     shell:
         'Rscript scripts/prune_tree.R --sp_list {input.sp_list} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
 
-rule visualize_tree_OG_1st_select_all_species:
-    input:
-        sp_list = 'data/species_list_1st_select.tsv',
-        gene = 'data/genome/gene_list_full.tsv',
-        selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_1st_select_summary.tsv',
-        tree = 'data/tree/fishtree_1st_select.nwk'
-    output:
-        'data/figure/tree_inc_polar_OG_1st_select_all_species.pdf'
-    log:
-        stdout = 'log/visualize_tree_OG_1st_select_all_species.stdout',
-        stderr = 'log/visualize_tree_OG_1st_select_all_species.stderr'
-    container:
-        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
-    shell:
-        'Rscript scripts/visualize_tree_OG_1st_select_all_species.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
-
 rule visualize_tree_OG_2nd_select_all_species:
     input:
         sp_list = 'data/species_list_1st_select.tsv',
@@ -340,22 +322,6 @@ rule visualize_tree_OG_2nd_select_all_species:
         f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
     shell:
         'Rscript scripts/visualize_tree_OG_2nd_select_all_species.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
-
-rule visualize_tree_OG_1st_select_downsampling:
-    input:
-        sp_list = 'data/species_list_2nd_select.tsv',
-        gene = 'data/genome/gene_list_full.tsv',
-        selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_1st_select_summary.tsv',
-        tree = 'data/tree/fishtree_2nd_select.nwk'
-    output:
-        'data/figure/tree_inc_polar_OG_1st_select_downsampling.pdf'
-    log:
-        stdout = 'log/visualize_tree_OG_1st_select_downsampling.stdout',
-        stderr = 'log/visualize_tree_OG_1st_select_downsampling.stderr'
-    container:
-        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
-    shell:
-        'Rscript scripts/visualize_tree_OG_1st_select_downsampling.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
 
 rule visualize_n_gene_latitude:
     input:
@@ -387,20 +353,20 @@ rule visualize_n_gene_latitude_summary:
     shell:
         'Rscript scripts/visualize_n_gene_latitude_summary.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --output {output} > {log.stdout} 2> {log.stderr}'
 
-# rule visualize_n_gene_latitude_summary_renamed:
-#     input:
-#         sp_list = 'data/species_list_1st_select.tsv',
-#         gene = 'data/genome/gene_list_full.tsv',
-#         selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_renamed.csv'
-#     output:
-#         'data/figure/n_gene_latitude_summary_renamed.pdf'
-#     log:
-#         stdout = 'log/visualize_n_gene_latitude_summary_renamed.stdout',
-#         stderr = 'log/visualize_n_gene_latitude_summary_renamed.stderr'
-#     container:
-#         f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
-#     shell:
-#         'Rscript scripts/visualize_n_gene_latitude_summary_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --output {output} > {log.stdout} 2> {log.stderr}'
+rule visualize_n_gene_latitude_summary_renamed:
+    input:
+        sp_list = 'data/species_list_1st_select.tsv',
+        gene = 'data/genome/gene_list_full.tsv',
+        selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_renamed.csv'
+    output:
+        'data/figure/n_gene_latitude_summary_renamed.pdf'
+    log:
+        stdout = 'log/visualize_n_gene_latitude_summary_renamed.stdout',
+        stderr = 'log/visualize_n_gene_latitude_summary_renamed.stderr'
+    container:
+        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
+    shell:
+        'Rscript scripts/visualize_n_gene_latitude_summary_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --output {output} > {log.stdout} 2> {log.stderr}'
 
 rule mcmcglmm_n_gene_polar:
     input:
@@ -491,37 +457,37 @@ rule sort_by_family_name:
     shell:
         'Rscript scripts/sort_by_family_name.R --input {input} --output {output} > {log.stdout} 2> {log.stderr}'
 
-# rule visualize_tree_OG_2nd_select_all_species_renamed:
-#     input:
-#         sp_list = 'data/species_list_1st_select.tsv',
-#         gene = 'data/genome/gene_list_full.tsv',
-#         selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_renamed.csv',
-#         tree = 'data/tree/fishtree_1st_select.nwk'
-#     output:
-#         'data/figure/tree_inc_polar_OG_2nd_select_all_species_renamed.pdf'
-#     log:
-#         stdout = 'log/visualize_tree_OG_2nd_select_all_species_renamed.stdout',
-#         stderr = 'log/visualize_tree_OG_2nd_select_all_species_renamed.stderr'
-#     container:
-#         f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
-#     shell:
-#         'Rscript scripts/visualize_tree_OG_2nd_select_all_species_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
+rule visualize_tree_OG_2nd_select_all_species_renamed:
+    input:
+        sp_list = 'data/species_list_1st_select.tsv',
+        gene = 'data/genome/gene_list_full.tsv',
+        selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_renamed.csv',
+        tree = 'data/tree/fishtree_1st_select.nwk'
+    output:
+        'data/figure/tree_inc_polar_OG_2nd_select_all_species_renamed.pdf'
+    log:
+        stdout = 'log/visualize_tree_OG_2nd_select_all_species_renamed.stdout',
+        stderr = 'log/visualize_tree_OG_2nd_select_all_species_renamed.stderr'
+    container:
+        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
+    shell:
+        'Rscript scripts/visualize_tree_OG_2nd_select_all_species_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
 
-# rule visualize_tree_OG_2nd_select_pMCMC_all_species_renamed:
-#     input:
-#         sp_list = 'data/species_list_1st_select.tsv',
-#         gene = 'data/genome/gene_list_full.tsv',
-#         selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_renamed.csv',
-#         tree = 'data/tree/fishtree_1st_select.nwk'
-#     output:
-#         'data/figure/tree_inc_polar_OG_2nd_select_pMCMC_all_species_renamed.pdf'
-#     log:
-#         stdout = 'log/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.stdout',
-#         stderr = 'log/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.stderr'
-#     container:
-#         f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
-#     shell:
-#         'Rscript scripts/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
+rule visualize_tree_OG_2nd_select_pMCMC_all_species_renamed:
+    input:
+        sp_list = 'data/species_list_1st_select.tsv',
+        gene = 'data/genome/gene_list_full.tsv',
+        selected_OG = 'data/genome/OG_summary_by_polar_inc_polar_2nd_select_summary_pMCMC_filtered_renamed.csv',
+        tree = 'data/tree/fishtree_1st_select.nwk'
+    output:
+        'data/figure/tree_inc_polar_OG_2nd_select_pMCMC_all_species_renamed.pdf'
+    log:
+        stdout = 'log/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.stdout',
+        stderr = 'log/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.stderr'
+    container:
+        f'docker://aurelia01/dup_fish_rbase:{RBASE_TAG}'
+    shell:
+        'Rscript scripts/visualize_tree_OG_2nd_select_pMCMC_all_species_renamed.R --sp_list {input.sp_list} --gene {input.gene} --selected_OG {input.selected_OG} --tree {input.tree} --output {output} > {log.stdout} 2> {log.stderr}'
 
 # Gene ontology (GO) enrichment analysis
 rule GO_enrichment_analysis_full:

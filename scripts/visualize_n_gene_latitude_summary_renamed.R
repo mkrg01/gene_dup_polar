@@ -39,7 +39,7 @@ p <- ggplot(trait_og_df) +
     geom_point(aes(x=lat_abs_max, y=num, color = Polar_fish), size=0.5) +
     facet_wrap(~OG_name, ncol=4, scales='free', labeller=labeller(OG_name=label_wrap_gen(width = 30))) +
     theme(strip.text = element_text(size = 8)) +
-    scale_color_manual(values = c(True = 'cyan3', False = 'black')) +
+    scale_color_manual(values = c(True = '#00AAFF', False = 'black')) +
     xlab('Max absolute latitude') +
     ylab('Copy number')
 
